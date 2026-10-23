@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리니지 클래식 캐릭터 육성 자금 대여 상품 기안</title>
+<style>
+  :root{
+    --ink:#172033;
+    --muted:#667085;
+    --line:#E4E7EC;
+    --soft:#F8FAFC;
+    --brand:#1F4E79;
+    --brand2:#2F75B5;
+    --accent:#EAF2F8;
+    --good:#0F766E;
+    --warn:#A15C00;
+    --white:#fff;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#EEF2F6;color:var(--ink);font-family:"Pretendard","Noto Sans KR","Malgun Gothic",Arial,sans-serif;line-height:1.62}
+  body{padding:28px}
+  .page{
+    max-width:1180px;margin:0 auto;background:var(--white);
+    box-shadow:0 10px 30px rgba(16,24,40,.08);
+    border:1px solid #E8EDF3;
+  }
+  .header{
+    padding:42px 46px 34px;
+    border-top:8px solid var(--brand);
+    border-bottom:1px solid #D7E0EA;
+    background:linear-gradient(135deg,#F7FAFD 0%,#FFFFFF 58%,#EEF4F9 100%);
+  }
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;color:var(--brand2);margin-bottom:6px}
+  h1{
+    font-size:31px;line-height:1.3;margin:0 0 12px;font-weight:800;
+    letter-spacing:-.045em;color:#153A5B;
+  }
+  .subtitle{
+    font-size:14px;color:#5E6B78;margin:0;font-weight:600;
+    padding-top:4px;
+  }
+  .content{padding:30px 42px 46px}
+  .kpis{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 30px;
+  }
+  .kpi{
+    border:1px solid #CFD9E5;border-radius:10px;padding:18px 18px 16px;
+    background:linear-gradient(180deg,#FFFFFF 0%,#F6F9FC 100%);
+    box-shadow:0 2px 5px rgba(31,78,121,.04);
+  }
+  .kpi .label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:7px}
+  .kpi .value{font-size:24px;font-weight:800;letter-spacing:-.03em;color:var(--brand)}
+  .kpi .note{font-size:12px;color:var(--muted);margin-top:4px}
+  section{
+    margin-top:26px;
+    border:1px solid #D9E2EC;
+    border-radius:10px;
+    background:#FFFFFF;
+    overflow:hidden;
+    box-shadow:0 2px 7px rgba(16,24,40,.035);
+  }
+  h2{
+    font-size:18px;
+    margin:0;
+    padding:13px 18px;
+    background:#1F4E79;
+    color:#FFFFFF;
+    border-bottom:1px solid #163A5B;
+    letter-spacing:-.025em;
+    font-weight:800;
+  }
+  h3{font-size:15px;margin-top:18px;margin-bottom:8px;color:var(--brand);font-weight:800}
+
+  section > p,
+  section > ul,
+  section > table,
+  section > .lead,
+  section > .flow,
+  section > .two-col,
+  section > .expect,
+  section > .notice,
+  section > h3 {
+    margin-left:18px;
+    margin-right:18px;
+  }
+  section > p:first-of-type,
+  section > .lead:first-of-type,
+  section > table:first-of-type,
+  section > h3:first-of-type {
+    margin-top:18px;
+  }
+  section > p:last-child,
+  section > ul:last-child,
+  section > table:last-child,
+  section > .notice:last-child,
+  section > .flow:last-child,
+  section > .two-col:last-child,
+  section > .expect:last-child {
+    margin-bottom:18px;
+  }
+  section > ul { padding-left:20px; }
+  section > table { width:calc(100% - 36px); }
+
+  p{margin:7px 0;font-size:14px}
+  ul{margin:8px 0 0 20px;padding:0}
+  li{font-size:14px;margin:5px 0}
+  .lead{
+    padding:16px 18px;background:var(--soft);border-left:4px solid var(--brand);
+    border-radius:6px;font-size:14px;
+  }
+  .flow{
+    display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin-top:12px;
+  }
+  .flow .box{
+    flex:1 1 145px;min-width:145px;padding:12px 10px;border:1px solid var(--line);
+    border-radius:8px;background:#fff;text-align:center;font-size:13px;font-weight:700;
+  }
+  .flow .arrow{align-self:center;color:#98A2B3;font-weight:700}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top}
+  th{background:#F2F5F9;font-weight:800;text-align:left}
+  td.num, th.num{text-align:right;white-space:nowrap}
+  .highlight{background:var(--accent);font-weight:800}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .card{border:1px solid var(--line);border-radius:8px;padding:16px;background:#fff}
+  .card strong{color:var(--brand)}
+  .tag{
+    display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800;
+    background:var(--accent);color:var(--brand);margin-right:6px
+  }
+  .expect{
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px
+  }
+  .expect .panel{
+    border:1px solid var(--line);border-radius:10px;padding:20px;background:linear-gradient(180deg,#fff,#fbfdff)
+  }
+  .expect .big{font-size:28px;font-weight:900;color:var(--brand);letter-spacing:-.04em}
+  .expect .formula{font-size:13px;color:var(--muted);margin-top:3px}
+  .notice{
+    margin-top:14px;padding:14px 16px;border-radius:8px;
+    background:#FFF8EB;border:1px solid #F1D7A8;color:#69440A;font-size:13px
+  }
+  .decision{
+    margin-top:30px;
+    border:2px solid #1F4E79;
+    border-radius:10px;
+    background:#F7FBFF;
+    overflow:hidden;
+  }
+  .decision h2{
+    margin:0;
+    padding:14px 18px;
+    background:#153A5B;
+    color:#FFFFFF;
+    border:0;
+  }
+  .decision p{margin-left:18px;margin-right:18px}
+  .decision p:first-of-type{margin-top:18px}
+  .decision p:last-child{margin-bottom:18px}
+  .footer{padding:18px 42px;border-top:1px solid var(--line);font-size:11px;color:#98A2B3;background:#FBFCFE}
+  @media(max-width:820px){
+    body{padding:0}.page{border:0}.header,.content,.footer{padding-left:20px;padding-right:20px}
+    .kpis,.two-col,.expect{grid-template-columns:1fr}
+  }
+  @media print{
+    body{background:#fff;padding:0}
+    .page{box-shadow:none;border:0;max-width:none}
+    .header{
+    padding:42px 46px 34px;
+    border-top:8px solid var(--brand);
+    border-bottom:1px solid #D7E0EA;
+    background:linear-gradient(135deg,#F7FAFD 0%,#FFFFFF 58%,#EEF4F9 100%);
+  }
+    .kpis{grid-template-columns:repeat(4,1fr)}
+    section,.card,.panel,table{break-inside:avoid}
+  }
+
+</style></head>
+<body>
+<div class="page">
+  <header class="header">
+    <h1>리니지 클래식 캐릭터 육성 자금 대여 상품 기안</h1>
+    <p class="subtitle">거래 수수료(구매·판매) 연동 이자 차감형 대여 상품 시범 운영(안)</p>
+  </header>
+
+  <main class="content">
+    <div class="kpis">
+      <div class="kpi">
+        <div class="label">상품 총 한도</div>
+        <div class="value">20억원</div>
+        <div class="note">1인 5,000만원 ~ 1억원 · 대여 기간 3·6·12개월</div>
+      </div>
+      <div class="kpi">
+        <div class="label">적용 금리</div>
+        <div class="value">연 5%</div>
+        <div class="note">최초 대여금 기준 · 대여 기간만큼 산정</div>
+      </div>
+      <div class="kpi">
+        <div class="label">이자 차감</div>
+        <div class="value">거래 수수료</div>
+        <div class="note">대여 기간 중 납부한 구매·판매 수수료 합계만큼 차감</div>
+      </div>
+      <div class="kpi">
+        <div class="label">이자 정산</div>
+        <div class="value">만기 1회</div>
+        <div class="note">만기 시 이자 − 거래 수수료 합계 납부</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>1. 추진 목적</h2>
+      <div class="lead">
+        리니지 클래식 이용자에게 캐릭터 육성 자금을 연 5%로 대여하고, 대여 기간 중 이용자가 아이템매니아에서 구매·판매하며 납부한
+        <strong>거래 수수료 합계만큼 이자를 차감</strong>하는 대여 상품을 시범 운영하고자 함.
+      </div>
+      <p>구매·판매할수록 이자가 줄어드는 구조로 리니지 클래식 이용자의 구매·판매 거래를 아이템매니아로 유입하고 일원화하여 거래 유입을 확대함.</p>
+    </section>
+
+    <section>
+      <h2>2. 상품 구조</h2>
+      <table>
+        <thead>
+          <tr><th style="width:20%">구분</th><th>내용</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>대상</td><td>리니지 클래식을 플레이하는 이용자</td></tr>
+          <tr><td>대여 심사</td><td>아이템매니아 가입 기간 · 거래 이력 · 본인 인증 등 확인 (세부 기준은 내부 별도 운영)</td></tr>
+          <tr><td>대상 거래</td><td>리니지 클래식 <strong>아이템 및 게임재화</strong> 구매·판매 거래 (계정 거래 제외)</td></tr>
+          <tr><td>대여 조건</td><td>상품 총 한도 20억원 / 1인 <strong>최소 5,000만원</strong> ~ 최대 1억원 (100만원 단위) / 1인 1건 (본인 실명 기준, 기존 대여 상환·정산 완료 후 재대여 가능, 직전 대여 연체 이력이 있으면 재대여 제한) / <strong>대여 기간 3개월 · 6개월 · 12개월</strong> / 이용자 지정 계좌로 지급</td></tr>
+          <tr><td>거래처</td><td>대여 기간 중 리니지 클래식 아이템·게임재화의 <strong>구매·판매는 아이템매니아에서만</strong> 진행 (타 거래 사이트 이용 불가, 위반 확인 시 이용 혜택 중단)</td></tr>
+          <tr><td>금리</td><td><strong>연 5%, 최초 대여금 기준</strong> / 이자 = 최초 대여금 × 5% × 대여 개월 수 ÷ 12 (3개월 1.25%, 6개월 2.5%, 12개월 5%) / 대여 기간 중 원금을 상환해도 이자는 줄지 않음</td></tr>
+          <tr><td>이자 차감</td><td>대여 기간 중 이용자 본인 명의 아이템매니아 계정으로 리니지 클래식 구매·판매 시 <strong>실제 납부한 구매·판매 수수료(이하 거래 수수료) 합계</strong>만큼 이자에서 차감 (거래 수수료는 정상 부과 : 구매·판매 모두 <strong>거래금액의 5%, 건당 최대 53,000원</strong>)</td></tr>
+          <tr><td>이자 정산</td><td><strong>만기 시 1회 정산</strong> / 납부 이자 = 이자 − 대여 기간 중 거래 수수료 합계 / 거래 수수료 합계가 이자 이상이면 <strong>납부 이자 0원</strong></td></tr>
+          <tr><td>원금 상환</td><td><strong>만기 시 일시 상환</strong> (3·6·12개월 동일) / 만기 전 상환 자유 (중도상환 수수료 없음)<br>※ 만기 전에 상환해도 이자는 <strong>원래 대여 기간 기준</strong>이며, 거래 수수료는 <strong>원래 만기까지 차감 인정</strong> (이자 정산은 원래 만기에 진행)</td></tr>
+          <tr><td>수수료 안내</td><td>계약일 기준 매월 해당일에 대여 기간 중 거래 수수료 누적액 안내 (해당일이 없는 달은 그 달 말일)</td></tr>
+          <tr><td>만기 상환</td><td>만기일로부터 5일 이내 <strong>원금 + 납부 이자(이자 − 거래 수수료 합계)</strong> 일시 상환 (영업일이 아닌 경우 다음 영업일 / 아이템매니아가 상환액 안내 후 이용자 납부)</td></tr>
+          <tr><td>이용 혜택</td><td>대여 기간 중 입금·출금 시 발생하는 <strong>입·출금수수료(건당 1,000원)는 쿠폰으로 지원</strong></td></tr>
+          <tr><td>채권 보전</td><td>(안) 만기 상환 기한까지 미상환 시 연체 / 연체 시 입·출금수수료 쿠폰 지원 중단 및 재대여 제한 / 공정증서 작성<br><strong>※ 연체이자 등 연체 시 처리 기준 및 채권 보전 방식은 법무팀 검토 후 확정</strong></td></tr>
+        </tbody>
+      </table>
+
+      <h3>운영 흐름</h3>
+      <div class="flow">
+        <div class="box">대여 신청</div><div class="arrow">→</div>
+        <div class="box">계약 체결</div><div class="arrow">→</div>
+        <div class="box">대여금 지급</div><div class="arrow">→</div>
+        <div class="box">캐릭터 육성</div><div class="arrow">→</div>
+        <div class="box">아이템매니아 구매·판매<br>(거래 수수료 누적)</div><div class="arrow">→</div>
+        <div class="box">만기 일시 상환<br>(원금 + 이자 − 거래 수수료)</div>
+      </div>
+
+      <div class="notice">
+        이용자 본인 계정 간 거래, 특수관계인과의 거래, 취소·환불 거래의 거래 수수료는 이자 차감 대상에서 제외함. 게임사 제재 등으로 판매가 불가능한 경우에도 이자는 만기에 현금으로 납부함.
+      </div>
+    </section>
+
+    <section>
+      <h2>3. 이용자 의무</h2>
+      <div class="two-col">
+        <div class="card">
+          <span class="tag">거래</span>
+          <ul>
+            <li>대여 기간 중 아이템·게임재화 구매·판매는 아이템매니아에서만 진행</li>
+            <li>본인 명의 계정으로 아이템매니아에서 구매·판매</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="tag">상환</span>
+          <ul>
+            <li>만기 시 원금 및 납부 이자 일시 상환</li>
+            <li>월별 거래 수수료 누적 내역 확인</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 대여 조건 예시 및 예산</h2>
+      <table>
+        <thead>
+          <tr><th>항목</th><th>산정 기준</th><th class="num">금액 (1억원 · 12개월 예시)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>대여금</td><td>1인 최대 한도 예시</td><td class="num">100,000,000원</td></tr>
+          <tr><td>이자</td><td>최초 대여금 × 5% × 12 ÷ 12</td><td class="num">5,000,000원</td></tr>
+          <tr><td>거래 수수료 300만원 납부 시 만기 납부 이자</td><td>5,000,000원 − 3,000,000원</td><td class="num">2,000,000원</td></tr>
+          <tr class="highlight"><td colspan="2">거래 수수료 500만원 이상 납부 시 만기 납부 이자</td><td class="num">0원</td></tr>
+          <tr><td>만기 상환액 (거래 수수료 300만원 납부 시)</td><td>원금 + 납부 이자</td><td class="num">102,000,000원</td></tr>
+        </tbody>
+      </table>
+
+      <h3>대여 기간별 이자 (1억원 기준)</h3>
+      <table>
+        <thead>
+          <tr><th>대여 기간</th><th>산정 기준</th><th class="num">이자</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>3개월</td><td>1억원 × 5% × 3 ÷ 12</td><td class="num">1,250,000원</td></tr>
+          <tr><td>6개월</td><td>1억원 × 5% × 6 ÷ 12</td><td class="num">2,500,000원</td></tr>
+          <tr><td>12개월</td><td>1억원 × 5%</td><td class="num">5,000,000원</td></tr>
+        </tbody>
+      </table>
+
+      <h3>소요 자금 및 예산 (시범 운영)</h3>
+      <table>
+        <thead>
+          <tr><th>항목</th><th>내용</th><th class="num">금액</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>상품 총 한도</td><td>상품 전체 대여 가능 총액</td><td class="num">2,000,000,000원</td></tr>
+          <tr><td>시범 대여 자금</td><td>이용자 1명 · 1인 최대 한도 (원금 회수 예정)</td><td class="num">최대 100,000,000원</td></tr>
+          <tr><td>운영 비용</td><td>입·출금수수료 쿠폰 지원 (건당 1,000원), 공정증서 작성 비용 등</td><td class="num">소액 (건별 발생)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>5. 기대 효과</h2>
+      <div class="expect">
+        <div class="panel">
+          <div class="label">거래금액 유입</div>
+          <div class="big">최소 1억원 (= 대여금)</div>
+          <div class="formula">이자 500만원 ÷ 거래 수수료율 5% (1억원 · 12개월 · 이자 전액 차감 시)</div>
+          <p>이자를 줄이려면 아이템매니아에서 구매·판매해야 하는 구조로, 이자 전액 차감 시 대여금 이상의 거래금액이 유입될 것으로 기대.</p>
+        </div>
+        <div class="panel">
+          <div class="label">거래 유입</div>
+          <div class="big">최소 95건 이상</div>
+          <div class="formula">500만원 ÷ 건당 최대 수수료 53,000원</div>
+          <p>이자를 전액 차감하려면 최소 95건 이상의 구매·판매 거래가 필요하여, 대여 기간 동안 아이템매니아 거래가 지속적으로 유입될 것으로 기대.</p>
+        </div>
+      </div>
+      <p>이자 수익이 아닌 <strong>구매·판매 거래 유입</strong>에 집중하며, 만기 이자 차감 구조로 대여 기간 내내 아이템매니아 거래를 지속적으로 유도함. 조기 상환 시에도 원래 만기까지 거래 수수료를 인정하여 거래가 만기까지 이어지도록 함.</p>
+      <h3>규모별 이자 및 최소 거래금액 (이자 전액 차감 시)</h3>
+      <table>
+        <thead>
+          <tr><th>대여금액</th><th>구분</th><th class="num">3개월</th><th class="num">6개월</th><th class="num">12개월</th></tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">5,000만원 (1인 최소)</td><td>이자 (= 필요 수수료)</td><td class="num">62만 5,000원</td><td class="num">125만원</td><td class="num">250만원</td></tr>
+          <tr><td><strong>최소 거래금액</strong></td><td class="num"><strong>1,250만원</strong></td><td class="num"><strong>2,500만원</strong></td><td class="num"><strong>5,000만원</strong></td></tr>
+          <tr><td rowspan="2">1억원 (1인 최대)</td><td>이자 (= 필요 수수료)</td><td class="num">125만원</td><td class="num">250만원</td><td class="num">500만원</td></tr>
+          <tr><td><strong>최소 거래금액</strong></td><td class="num"><strong>2,500만원</strong></td><td class="num"><strong>5,000만원</strong></td><td class="num"><strong>1억원</strong></td></tr>
+          <tr class="highlight"><td rowspan="2">20억원 (상품 총 한도)</td><td>이자 (= 필요 수수료)</td><td class="num">2,500만원</td><td class="num">5,000만원</td><td class="num">1억원</td></tr>
+          <tr class="highlight"><td><strong>최소 거래금액</strong></td><td class="num"><strong>5억원</strong></td><td class="num"><strong>10억원</strong></td><td class="num"><strong>20억원</strong></td></tr>
+        </tbody>
+      </table>
+      <p class="small" style="color:#667085;font-size:12.5px">※ 최소 거래금액 = 이자 ÷ 거래 수수료율 5% / 거래 수수료 합계가 이자보다 적으면 차액을 만기에 이자로 납부함.</p>
+    </section>
+
+    <section>
+      <h2>6. 운영 방향</h2>
+      <table>
+        <thead>
+          <tr><th style="width:18%">단계</th><th>주요 내용</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1단계 · 시범 운영</strong></td>
+            <td>이용자 1명 대상 / 시범 기간 : 추후 확정 / 대여·거래 수수료 이자 차감·상환 프로세스 검증</td>
+          </tr>
+          <tr>
+            <td><strong>2단계 · 성과 검증</strong></td>
+            <td>거래 수수료 유입 · 거래 건수 · 거래 유입 규모 · 상환 이행 여부 확인</td>
+          </tr>
+          <tr>
+            <td><strong>3단계 · 확대 검토</strong></td>
+            <td>상품 총 한도 20억원 내에서 대상 이용자 확대, 타 게임 적용 검토</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="decision">
+      <h2>7. 결론 및 요청사항</h2>
+      <p>
+        리니지 클래식 이용자를 대상으로 <strong>상품 총 한도 20억원 · 1인 5,000만원 ~ 1억원 · 3·6·12개월 · 연 5%</strong> 조건의 캐릭터 육성 자금 대여 상품을 운영하되,
+        대여 기간 중 납부한 거래 수수료(구매·판매) 합계만큼 이자를 차감하여 원금과 함께 만기에 1회 정산·상환하는 방식으로 <strong>이용자 1명 대상 시범 운영</strong>하고자 함.
+      </p>
+      <p>
+        구매·판매할수록 이자가 줄어드는 구조로 이자 수익보다 거래 유입에 중점을 두며, 1억원 · 12개월 대여 시 최소 1억원(대여금 이상)의 거래금액 유입을 목표로 함(상품 총 한도 20억원 운영 시 최소 20억원). 시범 운영 성과 확인 후 총 한도 내에서 대상을 확대하고자 함.
+      </p>
+      <p><strong>요청사항</strong></p>
+      <ul style="margin-left:38px;margin-right:18px;margin-bottom:18px">
+        <li>법무팀 검토 요청 : 상품 운영 적법성, 채권 보전 방식 및 계약서 검토</li>
+        <li>회계팀 검토 요청 : 대여 자금 운용 및 거래 수수료 연동 이자 차감에 따른 회계·세무 처리</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="footer">
+    본 문서는 리니지 클래식 캐릭터 육성 자금 대여 상품 시범 운영을 위한 내부 검토·결재용 자료입니다.
+  </div>
+</div>
+
+</body></html>
